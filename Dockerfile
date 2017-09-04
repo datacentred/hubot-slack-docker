@@ -1,13 +1,14 @@
-FROM ubuntu:trusty
+FROM ubuntu:xenial
 MAINTAINER "Pedro Cesar" <pedrocesar.ti@gmail.com>
 EXPOSE 6379
 
 # VARIABLES
 ENV DIRECTORY "/home/hubot"
-ENV NAME "cyberdyne"
-ENV OWNER "Pedro Cesar"
+ENV DIRECTORY2 "/home/hubot/scripts"
+ENV NAME "marvin"
+ENV OWNER "me"
 ENV DESCRIPTION "Hubot teste."
-ENV NODE_VERSION "5.0.0"
+ENV NODE_VERSION "6.11.0"
 
 # INSTALL SYSTEM TOOLS
 RUN apt-get update && \
@@ -40,6 +41,7 @@ RUN nodenv rehash
 RUN npm config set unsafe-perm true
 RUN npm cache clean && npm install -g yo
 ADD conf/ "$DIRECTORY"
+ADD scripts/ "$DIRECTORY2"
 RUN npm install generator-hubot
 
 # INSTALL APP
